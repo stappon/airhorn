@@ -22,11 +22,11 @@ div.text-container {
 div.small {
   font-size: 8pt; 
 }
-
-#title { 
+div.title { 
   font-size: 48pt; 
   text-align:center; 
 }
+
 #main-content{ 
   display: block; 
   margin: 0px auto; 
