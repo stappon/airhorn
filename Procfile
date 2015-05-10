@@ -1,1 +1,1 @@
-worker: tweet_listener/tweepy_listener.py
+worker: python -u tweet_listener/tweepy_listener.py

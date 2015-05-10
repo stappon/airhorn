@@ -51,6 +51,7 @@ class TwitterListener(StreamListener):
     def on_error(self, status):
         print("twitter_listener:on_error",status)
 
+print "DISRUPTOR OPERATIONAL"
 # create our OAuth
 auth = OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
