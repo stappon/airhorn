@@ -8,40 +8,68 @@
 #define SERVO_MAX_DEGREES 180
 Servo servo;
 
+// debug LED
+#define LED_PIN D1
+
 
 /* Setup */
 void setup()
 {
+	// hook up debugging machinery
 	Serial.begin(9600);
+	pinMode(LED_PIN, OUTPUT);
+
+	// initialize servo
 	pinMode(SERVO_PIN, OUTPUT);
 	servo.attach(SERVO_PIN);
 	go_to_position_in_degrees(0);
 
+	// register the Spark function
+	Spark.function("disrupt", disrupt);
+
+	// blink the LED to show that we've begun
+	digitalWrite(LED_PIN, HIGH);
 	delay(1000);
+	digitalWrite(LED_PIN, LOW);
 }
 
 /* Loop */
 void loop()
+{} // no-op - API callback drives the action
+
+
+/* API callback */
+int disrupt(String arg)
 {
-	disrupt(500);
-	delay(2000);
+	// LED on
+	digitalWrite(LED_PIN, HIGH);
+
+	// BRAAAAAAAAAAP
+	uint16_t pos = arg.toInt();
+	blow_that_horn(pos);
+
+	// LED off
+	digitalWrite(LED_PIN, LOW);
+
+	// SUCCESS IS THE ONLY OPTION
+	return 0; 
 }
 
 
 /* Utility functions */
 
 // disrupt the eardrum industry
-void disrupt(uint16_t duration_ms)
+void blow_that_horn(uint16_t duration_ms)
 {
 	go_to_position_in_degrees(180);
 	delay(duration_ms);
 	go_to_position_in_degrees(0);
 }
 
-void go_to_position_in_degrees(int16_t target_pos)
+void go_to_position_in_degrees(uint8_t target_pos)
 {
 	// get the current and clamped target positions
-	int16_t pos = servo.read();
+	uint8_t pos = servo.read();
 	target_pos = CLAMP(target_pos, 0, SERVO_MAX_DEGREES); // assume range is [0:max_degrees]
 
 	// if there's nothing to do, bail
