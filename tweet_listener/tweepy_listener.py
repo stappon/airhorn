@@ -44,7 +44,7 @@ class TwitterListener(StreamListener):
         self.spark_client = spark_client
 
     def on_data(self, data):
-        print("twitter_listener:on_data",data)
+        print("twitter_listener:on_data", data.screen_name, data.text)
         spark_client.disrupt()
         return(True)
 
@@ -52,6 +52,7 @@ class TwitterListener(StreamListener):
         print("twitter_listener:on_error",status)
 
 print "DISRUPTOR OPERATIONAL"
+
 # create our OAuth
 auth = OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
