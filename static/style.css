@@ -1,0 +1,59 @@
+body { 
+  background-image:url("airhorn.png"); 
+  background-repeat: repeat; 
+}
+div { 
+  font-family: "Comic Sans MS", "Comic Sans"; 
+}
+img { 
+  vertical-align: top; 
+}
+a { 
+  color:#9a3f30; 
+}
+
+div.step-header { 
+  font-size: 16pt; 
+  text-align:left; 
+}
+div.text-container { 
+  display:inline-block; 
+}
+
+#title { 
+  font-size: 48; 
+  text-align:center; 
+}
+#main-content{ 
+  display: block; 
+  margin: 0px auto; 
+  text-align: center; 
+}
+
+@keyframes blink {  
+  0% { opacity: 1.0; }
+  40% { opacity: 0.0; }
+  60% { opacity: 1.0; }
+}
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  40% { opacity: 0.0; }
+  60% { opacity: 1.0; }
+}
+.blink {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+}
+
+.rainbow-text {                                                                                                                                                                           
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-gradient(linear,  left top,  left bottom, 
+      color-stop(0.00, red), 
+      color-stop(16%, orange),
+      color-stop(32%, yellow),
+      color-stop(48%, green),
+      color-stop(60%, blue),
+      color-stop(76%, indigo),
+      color-stop(1.00, violet));
+}
