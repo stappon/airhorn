@@ -1,10 +1,16 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, send_from_directory
 from os import getenv
-app = Flask(__name__)
+import os
+app = Flask(__name__, static_folder=os.path.dirname(os.path.realpath(__file__)) + "/../static")
+# app.debug = True
 
 @app.route('/')
 def index():
-    return send_file("../static/index.html")
+    return send_file(app.static_folder + "/index.html")
+
+@app.route('/<path:filename>')
+def static_files(filename):
+    return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
     port = getenv("PORT")
