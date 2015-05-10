@@ -19,15 +19,21 @@ div.step-header {
 div.text-container { 
   display:inline-block; 
 }
+div.small {
+  font-size: 8pt; 
+}
 
 #title { 
-  font-size: 48; 
+  font-size: 48pt; 
   text-align:center; 
 }
 #main-content{ 
   display: block; 
   margin: 0px auto; 
   text-align: center; 
+}
+#footer {
+  padding-top: 15px;
 }
 
 @keyframes blink {  
