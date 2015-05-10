@@ -9,7 +9,7 @@
 Servo servo;
 
 // horn on/off positions
-#define HORN_ENGAGED_POS 120
+#define HORN_ENGAGED_POS 90
 #define HORN_DISENGAGED_POS 180
 
 // debug LED
