@@ -1,7 +1,10 @@
+#!/usr/bin/python -tt
+# -*- coding: utf-8 -*-
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 from os import getenv
+import json
 import requests
 
 #consumer key, consumer secret, access token, access secret.
@@ -44,14 +47,16 @@ class TwitterListener(StreamListener):
         self.spark_client = spark_client
 
     def on_data(self, data):
-        print("twitter_listener:on_data", data.screen_name, data.text)
+        tweet = json.loads(data)
+        # FIXME: how to fix utf8 print to terminal?
+        print("twitter_listener:on_data", tweet['user']['screen_name'], tweet['text'])
         spark_client.disrupt()
         return(True)
 
     def on_error(self, status):
         print("twitter_listener:on_error",status)
 
-print "DISRUPTOR OPERATIONAL"
+print("DISRUPTOR OPERATIONAL")
 
 # create our OAuth
 auth = OAuthHandler(ckey, csecret)
