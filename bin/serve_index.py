@@ -8,10 +8,11 @@ def index():
 
 if __name__ == '__main__':
     port = getenv("PORT")
-    print getenv("PWD")
-    if port:
+    if port: # heroku
+        host = "0.0.0.0"
         port = int(port)
-    else:
+    else: # dev
+        host = "127.0.0.1"
         port = 5000
-    print "booted up serve_index"
-    app.run(port=port)
+
+    app.run(host=host, port=port)
