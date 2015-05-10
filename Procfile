@@ -1,1 +1,1 @@
-worker: tweepy_listner.py
+worker: tweepy_listener.py
