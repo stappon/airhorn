@@ -17,5 +17,5 @@ Created for the [Stupid Shit No One Needs and Terrible Ideas Hackathon](http://s
 You can use curl to manually trigger the Spark Core if you get tired of tweeting at it.
 ```
  curl https://api.spark.io/v1/devices/[your_device_id]/disrupt \
-  -d access_token=your_access_token
+  -d access_token=[your_access_token]
 ```
