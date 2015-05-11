@@ -57,14 +57,13 @@ class TwitterListener(StreamListener):
     def on_data(self, data):
         tweet = json.loads(data)
         user = tweet['user']['screen_name']
-        if (user != self.username):
-            # FIXME: how to fix utf8 print to terminal?
-            print("twitter_listener:on_data", user, tweet['text'])
-            spark_client.disrupt()
-            # check environment variable before each reply, in case we need to disable
-            # replies in a hurry
-            if (getenv('DISRUPT_REPLY') is not None):
-                self.reply_to_tweet(user, tweet['id'])
+        # FIXME: how to fix utf8 print to terminal?
+        print("twitter_listener:on_data", user, tweet['text'])
+        spark_client.disrupt()
+        # check environment variable before each reply, in case we need to disable
+        # replies in a hurry. also don't make account reply to itself.
+        if (user != self.username and getenv('DISRUPT_REPLY') is not None):
+            self.reply_to_tweet(user, tweet['id'])
         return(True)
 
     def reply_to_tweet(self, user, tweet_id):
